@@ -42,7 +42,6 @@ export default async function Home({
           <FlightLists flightData={flightData} searchQuery={searchQuery} getAll={getAll} />
         ) : null }
 
-
       </div>
     </div>
   );

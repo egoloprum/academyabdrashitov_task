@@ -21,7 +21,7 @@ const FlightsAllBtn: FC<FlightsAllBtnProps> = ({}) => {
 
   return (
     <form onSubmit={(e) => handleSubmit && handleSubmit(e)}>
-      <button className='p-2 border-2 rounded'>
+      <button className='p-2 px-8 border-2 rounded'>
         See all flights
       </button>
     </form>
