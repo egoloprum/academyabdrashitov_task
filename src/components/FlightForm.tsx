@@ -54,7 +54,6 @@ const FlightForm: FC<FlightFormProps> = ({departures, arrivals}) => {
 
   return (
     <form onSubmit={(e) => handleSearch && handleSearch(e)} className='max-w-[1000px] mt-40 w-full flex flex-col sm:flex-row gap-4'>
-
       <div className='basis-1/3 flex flex-col text-black relative'>
         <label className='mb-2 border-b'>Departure</label>
         <input
@@ -127,7 +126,6 @@ const FlightForm: FC<FlightFormProps> = ({departures, arrivals}) => {
           Find
         </button>
       </div>
-
     </form>
   )
 }

@@ -7,9 +7,6 @@ import { getArrivalDestinations, getDepartureDestinations } from "@/utils/helper
 interface SearchParams {
   departure: string
   arrival: string
-  forthDate: string
-  backDate: string
-
   all: string
 }
 
@@ -20,14 +17,10 @@ export default async function Home({
   const resolvedSearchParams = await searchParams
   const departure = resolvedSearchParams.departure || ''
   const arrival = resolvedSearchParams.arrival || ''
-  const forthDate = resolvedSearchParams.forthDate || ''
-  const backDate = resolvedSearchParams.backDate || ''
 
   const searchQuery = {
     departure: departure,
     arrival: arrival,
-    forthDate: forthDate,
-    backDate: backDate
   }
 
   const getAll = resolvedSearchParams.all || ''
@@ -45,7 +38,10 @@ export default async function Home({
 
         <FlightsAllBtn />
 
-        <FlightLists flightData={flightData} searchQuery={searchQuery} getAll={getAll} />
+        { getAll.length ? (
+          <FlightLists flightData={flightData} searchQuery={searchQuery} getAll={getAll} />
+        ) : null }
+
 
       </div>
     </div>
