@@ -1,6 +1,6 @@
 import FlightDetailForm from "@/components/FlightDetailForm"
 import { getFlightById } from "@/utils/helper"
-import { ArrowRight, BookCheck } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 interface pageProps {
   params: {
@@ -13,8 +13,6 @@ const page = async ({ params }: { params: Promise<pageProps['params']> }) => {
   const { id } = resolvedParams
 
   const flight = getFlightById(id)
-
-  console.log(flight)
 
   // if (!flight) {
   //   return null

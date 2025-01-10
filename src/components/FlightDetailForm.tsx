@@ -23,7 +23,6 @@ const FlightDetailForm: FC<FlightDetailFormProps> = ({ticket}) => {
   }
 
   const handleClick = () => {
-    console.log("click")
     if (error.some(err => err)) {
       alert("Please fix the errors before proceeding.");
     } else {

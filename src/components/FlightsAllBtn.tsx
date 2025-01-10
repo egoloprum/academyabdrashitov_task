@@ -1,13 +1,8 @@
 "use client"
 
 import { usePathname, useRouter } from 'next/navigation'
-import { FC } from 'react'
 
-interface FlightsAllBtnProps {
-  
-}
-
-const FlightsAllBtn: FC<FlightsAllBtnProps> = ({}) => {
+const FlightsAllBtn = ({}) => {
   const pathname = usePathname()
   const router = useRouter()
 

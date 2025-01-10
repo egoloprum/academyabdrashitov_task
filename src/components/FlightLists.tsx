@@ -8,12 +8,17 @@ import { parseDuration } from '@/utils/helper'
 
 interface FlightListsProps {
   flightData: FlightData
-  searchQuery: {}
+  searchQuery: {
+    departure: string,
+    arrival: string,
+  }
   getAll: string
 }
 
 const FlightLists: FC<FlightListsProps> = ({flightData, searchQuery, getAll}) => {
   const [flights, setFlights] = useState<FlightData>(flightData)
+
+  console.log(searchQuery)
 
   const [sortByPrice, setSortByPrice] = useState<string>("ASC")
   const [sortByDuration, setSortByDuration] = useState<string>("ASC")
