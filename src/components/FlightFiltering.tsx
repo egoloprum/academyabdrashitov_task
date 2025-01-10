@@ -23,7 +23,7 @@ const FlightFiltering: FC<FlightFilteringProps> = ({checkedStates, setCheckedSta
 
         <div className='p-2 border-2 w-full flex gap-2 items-center' onClick={() => handleToggle(1)}>
           <input type="checkbox" checked={checkedStates[1]} readOnly />
-          <span>No layovers</span>
+          <span>0 layover</span>
         </div>
 
         <div className='p-2 border-2 w-full flex gap-2 items-center' onClick={() => handleToggle(2)}>

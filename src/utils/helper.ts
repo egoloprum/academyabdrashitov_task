@@ -1,10 +1,17 @@
 import { getFlightData } from "./db"
 
+export const getFlightById = (id: string) => {
+  const flightList = getFlightData()
+  const flight = flightList.tickets.find(ticket => ticket.id === id)
+
+  return flight || null
+}
+
 export const getDepartureDestinations = () => {
-  const FlightList = getFlightData()
+  const flightList = getFlightData()
   const uniqueDestinations = new Set<string>()
 
-  FlightList.tickets.map((ticket: Ticket) => {
+  flightList.tickets.map((ticket: Ticket) => {
     const departure = ticket.flightInfo.departure.airport
 
     uniqueDestinations.add(departure.replace(" Airport", ""))
@@ -14,10 +21,10 @@ export const getDepartureDestinations = () => {
 }
 
 export const getArrivalDestinations = () => {
-  const FlightList = getFlightData()
+  const flightList = getFlightData()
   const uniqueDestinations = new Set<string>()
 
-  FlightList.tickets.map((ticket: Ticket) => {
+  flightList.tickets.map((ticket: Ticket) => {
     const arrival = ticket.flightInfo.arrival.airport
 
     uniqueDestinations.add(arrival.replace(" Airport", ""))

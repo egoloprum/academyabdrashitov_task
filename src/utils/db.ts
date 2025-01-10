@@ -32,7 +32,7 @@ const generateFlightData = () : FlightData => {
         departure: faker.date.future().toISOString(),
         return: faker.date.future().toISOString(),
       },
-      class: faker.helpers.arrayElement(['эконом', 'бизнес']),
+      class: faker.helpers.arrayElement(['economy', 'business']),
       baggage: {
         included: faker.datatype.boolean(),
         allowance: `${faker.number.int({ min: 1, max: 2 })}x${faker.number.int({ min: 20, max: 30 })}kg`,
