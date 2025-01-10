@@ -30,6 +30,16 @@ const FlightForm: FC<FlightFormProps> = ({departures, arrivals}) => {
   const [filteredArrivals, setFilteredArrivals] = useState<string[]>(arrivals)
   const [showArrivalSelect, setShowArrivalSelect] = useState(false)
 
+  const handleSelectDeparture = (value: string) => {
+    setSearchDeparture(value)
+    setShowDepartureSelect(false)
+  }
+
+  const handleSelectArrival = (value: string) => {
+    setSearchArrival(value)
+    setShowArrivalSelect(false)  
+  }
+
   useEffect(() => {
     setFilteredDepartures(departures.filter(dest => 
       dest.toLowerCase().includes(searchDeparture.toLowerCase())
@@ -43,79 +53,77 @@ const FlightForm: FC<FlightFormProps> = ({departures, arrivals}) => {
   }, [searchArrival])
 
   return (
-    <form onSubmit={(e) => handleSearch && handleSearch(e)} className='border-2 max-w-[1000px] mt-20 w-full flex flex-row'>
+    <form onSubmit={(e) => handleSearch && handleSearch(e)} className='max-w-[1000px] mt-40 w-full flex flex-col sm:flex-row gap-4'>
 
-      <div className='basis-1/5 focus:outline-2 focus:outline-red-500 hover:outline-2 hover:outline-red-500 text-black border-2 relative'>
-        <label>Departure</label>
+      <div className='basis-1/3 flex flex-col text-black relative'>
+        <label className='mb-2 border-b'>Departure</label>
         <input
           type="text"
           placeholder="Search..."
           value={searchDeparture}
-          onChange={(e) => setSearchDeparture(e.target.value)}
+          onChange={(e) => {
+            setSearchDeparture(e.target.value);
+            setShowDepartureSelect(true);
+          }}
           onFocus={() => setShowDepartureSelect(true)}
-          className="p-2 border border-gray-300 rounded w-full"
+          className="p-2 border-2 focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full"
         />
         
-        {showDepartureSelect ? (
-          <select
-            className='p-2 w-full absolute -bottom-10 left-0 border-2 border-red-500 z-10'
-            value=""
-            onChange={(e) => {
-              const selectedValue = e.target.value;
-              setSearchDeparture(selectedValue);
-              if (selectedValue) { setShowDepartureSelect(false); }
-            }}
-          >
-            {filteredDepartures.map((dest, index) => (
-              <option key={index} value={dest}>{dest}</option>
-            ))}
-            <option value="" disabled>Select a departure</option>
-          </select>
-        ) : null}
+        {showDepartureSelect && (
+          <div className="absolute top-20 left-0 w-full max-h-32 overflow-y-auto border-2 z-10 bg-white">
+            {filteredDepartures.length > 0 ? (
+              filteredDepartures.map((dest, index) => (
+                <div
+                  key={index}
+                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                  onClick={() => handleSelectDeparture(dest)}
+                >
+                  {dest}
+                </div>
+              ))
+            ) : (
+              <div className="p-2 text-gray-500" onClick={ () => handleSelectDeparture("") }>No options available</div>
+            )}
+          </div>
+        )}
       </div>
 
-      <div className='basis-1/5 focus:outline-2 focus:outline-red-500 hover:outline-2 hover:outline-red-500 text-black border-2 relative'>
-        <label>Arrival</label>
+      <div className='basis-1/3 flex flex-col text-black relative'>
+        <label className='mb-2 border-b'>Arrivals</label>
         <input
           type="text"
           placeholder="Search..."
           value={searchArrival}
-          onChange={(e) => setSearchArrival(e.target.value)}
+          onChange={(e) => {
+            setSearchArrival(e.target.value);
+            setShowArrivalSelect(true);
+          }}
           onFocus={() => setShowArrivalSelect(true)}
-          className="p-2 border border-gray-300 rounded w-full"
+          className="p-2 border-2 focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full"
         />
         
-        {showArrivalSelect ? (
-          <select
-            className='p-2 w-full absolute -bottom-10 left-0 border-2 border-red-500 z-10'
-            value=""
-            onChange={(e) => {
-              const selectedValue = e.target.value;
-              setSearchArrival(selectedValue);
-              if (selectedValue) { setShowArrivalSelect(false); }
-            }}
-          >
-            {filteredArrivals.map((dest, index) => (
-              <option key={index} value={dest}>{dest}</option>
-            ))}
-            <option value="" disabled>Select an arrival</option>
-          </select>
-        ) : null}
+        {showArrivalSelect && (
+          <div className="absolute top-20 left-0 w-full max-h-32 overflow-y-auto border-2 z-10 bg-white">
+            {filteredArrivals.length > 0 ? (
+              filteredArrivals.map((arriv, index) => (
+                <div
+                  key={index}
+                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                  onClick={() => handleSelectArrival(arriv)}
+                >
+                  {arriv}
+                </div>
+              ))
+            ) : (
+              <div className="p-2 text-gray-500" onClick={ () => handleSelectArrival("") }>No options available</div>
+            )}
+          </div>
+        )}
       </div>
 
-      <div className='basis-1/5 focus:outline-2 focus:outline-red-500 hover:outline-2 hover:outline-red-500 text-black border-2'>
-        <label className=''>Forth</label>
-        <input type="text" className='p-2 border border-gray-300 rounded w-full' placeholder='dd/mm/yyyy' />
-      </div>
-      
-      <div className='basis-1/5 focus:outline-2 focus:outline-red-500 hover:outline-2 hover:outline-red-500 text-black border-2'>
-        <label className=''>Back</label>
-        <input type="text" className='p-2 border border-gray-300 rounded w-full' placeholder='dd/mm/yyyy' />
-      </div>
-
-      <div className='basis-1/5 text-black border-2'>
-        <label className=''>Go on</label>
-        <button type='submit' className='p-2 border border-gray-300 rounded w-full'>
+      <div className='basis-1/3 flex flex-col text-black'>
+        <label className='mb-2 border-b'>Search flight</label>
+        <button type='submit' className='p-2 border border-gray-300 w-full'>
           Find
         </button>
       </div>
