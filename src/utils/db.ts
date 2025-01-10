@@ -1,11 +1,11 @@
 import { faker } from '@faker-js/faker';
 
-const flightData: FlightData = generateFlightData();
+const TICKET_COUNT = 20
 
-function generateFlightData(): FlightData {
+const generateFlightData = () : FlightData => {
   const tickets: Ticket[] = [];
 
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < TICKET_COUNT; i++) {
     const ticket: Ticket = {
       id: faker.string.uuid(),
       price: {
@@ -23,12 +23,7 @@ function generateFlightData(): FlightData {
         },
         duration: `${faker.number.int({ min: 1, max: 12 })}h ${faker.number.int({ min: 0, max: 59 })}m`,
       },
-      layovers: [
-        {
-          airport: `${faker.location.city()} Airport`,
-          duration: `${faker.number.int({ min: 1, max: 3 })}h`,
-        },
-      ],
+      layovers: generateLayovers(),
       airline: {
         name: faker.company.name(),
         code: faker.string.alpha({ length: 2 }).toUpperCase(),
@@ -45,12 +40,27 @@ function generateFlightData(): FlightData {
       returnToList: faker.datatype.boolean(),
     };
 
-    tickets.push(ticket);
+    tickets.push(ticket)
   }
 
-  return { tickets };
+  return { tickets }
 }
 
-export function getFlightData(): FlightData {
-  return flightData;
+const generateLayovers = () : Layover[] => {
+  const layovers: Layover[] = [];
+  const numberOfLayovers = faker.number.int({ min: 0, max: 3 })
+
+  for (let j = 0; j < numberOfLayovers; j++) {
+    layovers.push({
+      airport: `${faker.location.city()} Airport`,
+      duration: `${faker.number.int({ min: 1, max: 3 })}h`,
+    })
+  }
+
+  return layovers
+}
+
+const flightData: FlightData = generateFlightData()
+export const getFlightData = () : FlightData => {
+  return flightData
 }

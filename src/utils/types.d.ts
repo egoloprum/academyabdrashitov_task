@@ -1,46 +1,48 @@
+interface Baggage {
+  included: boolean;
+  allowance: string;
+}
+
+interface Layover {
+  airport: string;
+  duration: string;
+}
+
+interface FlightInfo {
+  departure: {
+    airport: string;
+    dateTime: string;
+  };
+  arrival: {
+    airport: string;
+    dateTime: string;
+  };
+  duration: string;
+}
+
+interface Airline {
+  name: string;
+  code: string;
+}
+
 interface Ticket {
-  id: string
-
+  id: string;
   price: {
-    amount: number
-    currency: string
-  }
-
-  flightInfo: {
-    departure: {
-      airport: string
-      dateTime: string
-    }
-    arrival: {
-      airport: string
-      dateTime: string
-    }
-    duration: string
-  }
-
-  layovers: {
-    airport: string
-    duration: string
-  }[]
-
-  airline: {
-    name: string
-    code: string
-  }
-
+    amount: number;
+    currency: string;
+  };
+  flightInfo: FlightInfo;
+  layovers: Layover[];
+  airline: Airline;
   dates: {
-    departure: string
-    return: string
-  }
-
-  class: string
-  baggage: {
-    included: boolean
-    allowance: string
-  }
-  returnToList: boolean
+    departure: string;
+    return: string;
+  };
+  class: string;
+  baggage: Baggage;
+  returnToList: boolean;
 }
 
 interface FlightData {
-  tickets: Ticket[]
+  tickets: Ticket[];
 }
