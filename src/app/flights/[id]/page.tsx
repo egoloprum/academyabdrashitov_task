@@ -14,9 +14,9 @@ const page = async ({ params }: { params: Promise<pageProps['params']> }) => {
 
   const flight = getFlightById(id)
 
-  // if (!flight) {
-  //   return null
-  // }
+  if (!flight) {
+    return null
+  }
   
   return (
     <div className="border-2 p-4 flex justify-center items-center">

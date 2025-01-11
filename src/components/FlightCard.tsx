@@ -1,7 +1,7 @@
 "use client"
 
-import Link from 'next/link'
 import { FC } from 'react'
+import MyLink from './MyLink'
 
 interface FlightCardProps {
   ticket: Ticket
@@ -9,7 +9,7 @@ interface FlightCardProps {
 
 const FlightCard: FC<FlightCardProps> = ({ticket}) => {
   return (
-    <Link href={`flights/${ticket.id}`} className='border-2 p-4 w-full'>
+    <MyLink href={`flights/${ticket.id}`} className='border-2 p-4 w-full'>
       <div className='flex gap-2 items-center justify-between'>
         <p className='basis-1/2 text-2xl text-indigo-500 font-bold'>{ticket.price.amount} {ticket.price.currency}</p>
         <p className='basis-1/2 '>{ticket.airline.name}</p>
@@ -48,7 +48,7 @@ const FlightCard: FC<FlightCardProps> = ({ticket}) => {
           null
         ) }
       </div>
-    </Link>
+    </MyLink>
   )
 }
 

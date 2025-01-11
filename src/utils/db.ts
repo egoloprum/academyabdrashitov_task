@@ -61,6 +61,12 @@ const generateLayovers = () : Layover[] => {
 }
 
 const flightData: FlightData = generateFlightData()
+
+
 export const getFlightData = () : FlightData => {
+  if (!flightData.tickets.length) {
+    return generateFlightData()
+  }
+  
   return flightData
 }

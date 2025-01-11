@@ -1,10 +1,11 @@
 "use client"
 
-import { BookCheck } from 'lucide-react'
+import { ArrowLeft, BookCheck } from 'lucide-react'
 import { FC, useState } from 'react'
 import FormBirthday from './FormBirthday'
 import FormName from './FormName'
 import FormDocument from './FormDocument'
+import { useRouter } from 'next/navigation'
 
 interface FlightDetailFormProps {
   ticket: Ticket | null
@@ -15,6 +16,7 @@ const FlightDetailForm: FC<FlightDetailFormProps> = ({ticket}) => {
   const [birthday, setBirthday] = useState<string>("")
   const [error, setError] = useState<boolean[]>([true, true, true])
   const [document, setDocument] = useState<string>("")
+  const router = useRouter()
 
   const updateErrorState = (index: number, isValid: boolean) => {
     const newErrorState = [...error]
@@ -24,10 +26,14 @@ const FlightDetailForm: FC<FlightDetailFormProps> = ({ticket}) => {
 
   const handleClick = () => {
     if (error.some(err => err)) {
-      alert("Please fix the errors before proceeding.");
+      alert("Please fix the errors before proceeding.")
     } else {
-      alert(`Flight ${ticket?.id} ticket successfully ordered by ${name}.`);
+      alert(`Flight ${ticket?.id} ticket successfully ordered by ${name}.`)
     }
+  }
+
+  const handleReturn = () => {
+    router.back()
   }
 
   return (
@@ -46,6 +52,18 @@ const FlightDetailForm: FC<FlightDetailFormProps> = ({ticket}) => {
           <BookCheck />
         </button>
       </p>
+
+      <p className="flex flex-col gap-2 sm:gap-4">
+        <label className="font-bold border-b">Cancel</label>
+        <button type="button"
+          onClick={() => handleReturn()}
+          className={`p-2 px-8 border-2 flex items-center gap-2 w-full`}
+        >
+          <span>Go back</span>
+          <ArrowLeft />
+        </button>
+      </p>
+
     </div>
   )
 }
