@@ -7,8 +7,7 @@ export const getFlightById = (id: string) => {
   return flight || null
 }
 
-export const getDepartureDestinations = () => {
-  const flightList = getFlightData()
+export const getDepartureDestinations = (flightList: FlightData) => {
   const uniqueDestinations = new Set<string>()
 
   flightList.tickets.map((ticket: Ticket) => {
@@ -20,8 +19,7 @@ export const getDepartureDestinations = () => {
   return Array.from(uniqueDestinations)
 }
 
-export const getArrivalDestinations = () => {
-  const flightList = getFlightData()
+export const getArrivalDestinations = (flightList: FlightData) => {
   const uniqueDestinations = new Set<string>()
 
   flightList.tickets.map((ticket: Ticket) => {
@@ -31,6 +29,44 @@ export const getArrivalDestinations = () => {
   })
 
   return Array.from(uniqueDestinations)
+}
+
+export const getArrivalByDeparture = (departure: string, flightList: FlightData) => {
+  const matchingFlights = flightList.tickets.filter(flight => flight.flightInfo.departure.airport.replace(" Airport", "") === departure)
+  const arrivals = matchingFlights.map(flight => flight.flightInfo.arrival.airport.replace(" Airport", ""))
+
+  return arrivals
+}
+
+export const getDepartureByArrival = (arrival: string, flightList: FlightData) => {
+  const matchingFlights = flightList.tickets.filter(flight => flight.flightInfo.arrival.airport.replace(" Airport", "") === arrival)
+  const departures = matchingFlights.map(flight => flight.flightInfo.departure.airport.replace(" Airport", ""))
+
+  return departures
+}
+
+export const getFlightByQuery = (arrival: string, departure: string, flightList: FlightData) => {
+  if (!arrival.length && !departure.length) {
+    return {tickets: []} as FlightData
+  }
+  
+  if (!arrival.length) {
+    const matchingFlights = flightList.tickets.filter(flight => flight.flightInfo.departure.airport.replace(" Airport", "") === departure)
+    return {tickets: matchingFlights} as FlightData
+  }
+
+  if (!departure.length) {
+    const matchingFlights = flightList.tickets.filter(flight => flight.flightInfo.arrival.airport.replace(" Airport", "") === arrival)
+    return {tickets: matchingFlights} as FlightData
+  }
+
+  const matchingFlights = flightList.tickets.filter(flight => 
+    flight.flightInfo.arrival.airport.replace(" Airport", "") === arrival ||
+    flight.flightInfo.departure.airport.replace(" Airport", "") === departure
+  )
+  
+  console.log(matchingFlights)
+  return {tickets: matchingFlights} as FlightData
 }
 
 export const parseDuration = (duration: string) => {

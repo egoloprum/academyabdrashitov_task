@@ -8,21 +8,18 @@ import { parseDuration } from '@/utils/helper'
 
 interface FlightListsProps {
   flightData: FlightData
-  searchQuery: {
-    departure: string,
-    arrival: string,
-  }
   getAll: string
 }
 
-const FlightLists: FC<FlightListsProps> = ({flightData, searchQuery, getAll}) => {
+const FlightLists: FC<FlightListsProps> = ({flightData, getAll}) => {
   const [flights, setFlights] = useState<FlightData>(flightData)
-
-  console.log(searchQuery)
-
   const [sortByPrice, setSortByPrice] = useState<string>("ASC")
   const [sortByDuration, setSortByDuration] = useState<string>("ASC")
   const [checkedStates, setCheckedStates] = useState<boolean[]>([true, false, false, false, false])
+
+  useEffect(() => {
+    setFlights(flightData)
+  }, [flights])
 
   useEffect(() => {
     const sortedFlights = [...flights.tickets].sort((a, b) => {
@@ -75,13 +72,11 @@ const FlightLists: FC<FlightListsProps> = ({flightData, searchQuery, getAll}) =>
         <FlightSorting setSortByPrice={setSortByPrice} setSortByDuration={setSortByDuration} />
       </div>
 
-      { getAll.length ? (
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-          { flights.tickets.map((ticket: Ticket, index: number) => (
-            <FlightCard key={index} ticket={ticket} />
-          )) }
-        </div>
-      ) : null }
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+        { flights.tickets.map((ticket: Ticket, index: number) => (
+          <FlightCard key={index} ticket={ticket} />
+        )) }
+      </div>
     </div>
   )
 }

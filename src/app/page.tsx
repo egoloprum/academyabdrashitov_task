@@ -2,7 +2,7 @@ import FlightForm from "@/components/FlightForm";
 import FlightLists from "@/components/FlightLists";
 import FlightsAllBtn from "@/components/FlightsAllBtn";
 import { getFlightData } from "@/utils/db";
-import { getArrivalDestinations, getDepartureDestinations } from "@/utils/helper";
+import { getArrivalDestinations, getDepartureDestinations, getFlightByQuery } from "@/utils/helper";
 
 interface SearchParams {
   departure: string
@@ -17,31 +17,21 @@ export default async function Home({
   const resolvedSearchParams = await searchParams
   const departure = resolvedSearchParams.departure || ''
   const arrival = resolvedSearchParams.arrival || ''
-
-  const searchQuery = {
-    departure: departure,
-    arrival: arrival,
-  }
-
+  
   const getAll = resolvedSearchParams.all || ''
+  
+  let flightData = getFlightData()  
+  const departureDest = getDepartureDestinations(flightData)
+  const arrivalDest = getArrivalDestinations(flightData)
 
-  const flightData = getFlightData()
-
-  const departureDest = getDepartureDestinations()
-  const arrivalDest = getArrivalDestinations()
-
+  const flightSearch = getFlightByQuery(arrival, departure, flightData)
+  
   return (
     <div className="w-full min-h-[100vh]">
       <div className="p-4 w-full flex flex-col gap-4 justify-center items-center">
-        
-        <FlightForm departures={departureDest} arrivals={arrivalDest} />
-
+        <FlightForm flightList={flightData} departures={departureDest} arrivals={arrivalDest} />
         <FlightsAllBtn />
-
-        { getAll.length ? (
-          <FlightLists flightData={flightData} searchQuery={searchQuery} getAll={getAll} />
-        ) : null }
-
+        <FlightLists flightData={getAll ? flightData : flightSearch} getAll={getAll} />
       </div>
     </div>
   );

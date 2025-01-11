@@ -1,14 +1,16 @@
 "use client"
 
+import { getArrivalByDeparture, getDepartureByArrival } from '@/utils/helper'
 import { usePathname, useRouter } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 
 interface FlightFormProps {
+  flightList: FlightData
   departures: string[]
   arrivals: string[]
 }
 
-const FlightForm: FC<FlightFormProps> = ({departures, arrivals}) => {
+const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -33,23 +35,37 @@ const FlightForm: FC<FlightFormProps> = ({departures, arrivals}) => {
   const handleSelectDeparture = (value: string) => {
     setSearchDeparture(value)
     setShowDepartureSelect(false)
+
+    setFilteredArrivals(getArrivalByDeparture(value, flightList))
   }
 
   const handleSelectArrival = (value: string) => {
     setSearchArrival(value)
-    setShowArrivalSelect(false)  
+    setShowArrivalSelect(false)
+
+    setFilteredDepartures(getDepartureByArrival(value, flightList))
   }
 
   useEffect(() => {
     setFilteredDepartures(departures.filter(dest => 
       dest.toLowerCase().includes(searchDeparture.toLowerCase())
     ))
+
+    if (searchDeparture.length) {
+      setFilteredArrivals(getArrivalByDeparture(searchDeparture, flightList))
+    }
+
   }, [searchDeparture])
 
   useEffect(() => {
     setFilteredArrivals(arrivals.filter(arriv => 
       arriv.toLowerCase().includes(searchArrival.toLowerCase())
     ))
+
+    if (searchArrival) {
+      setFilteredDepartures(getDepartureByArrival(searchArrival, flightList))
+    }
+
   }, [searchArrival])
 
   return (
@@ -61,8 +77,8 @@ const FlightForm: FC<FlightFormProps> = ({departures, arrivals}) => {
           placeholder="Search..."
           value={searchDeparture}
           onChange={(e) => {
-            setSearchDeparture(e.target.value);
-            setShowDepartureSelect(true);
+            setSearchDeparture(e.target.value)
+            setShowDepartureSelect(true)
           }}
           onFocus={() => setShowDepartureSelect(true)}
           className="p-2 border-2 focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full"
@@ -94,8 +110,8 @@ const FlightForm: FC<FlightFormProps> = ({departures, arrivals}) => {
           placeholder="Search..."
           value={searchArrival}
           onChange={(e) => {
-            setSearchArrival(e.target.value);
-            setShowArrivalSelect(true);
+            setSearchArrival(e.target.value)
+            setShowArrivalSelect(true)
           }}
           onFocus={() => setShowArrivalSelect(true)}
           className="p-2 border-2 focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full"
