@@ -40,14 +40,18 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
     setSearchDeparture(value)
     setShowDepartureSelect(false)
 
-    setFilteredArrivals(getArrivalByDeparture(value, flightList))
+    if (value) {
+      setFilteredArrivals(getArrivalByDeparture(value, flightList))
+    }
   }
 
   const handleSelectArrival = (value: string) => {
     setSearchArrival(value)
     setShowArrivalSelect(false)
 
-    setFilteredDepartures(getDepartureByArrival(value, flightList))
+    if (value) {
+      setFilteredDepartures(getDepartureByArrival(value, flightList))
+    }
   }
 
   useEffect(() => {
