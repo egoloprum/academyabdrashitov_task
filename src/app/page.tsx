@@ -32,7 +32,6 @@ export default async function Home({
 
     const departureDest = getDepartureDestinations(flightData)
     const arrivalDest = getArrivalDestinations(flightData)
-
     const flightSearch = getFlightByQuery(arrival, departure, flightData)
 
     return (
