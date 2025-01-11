@@ -65,7 +65,6 @@ export const getFlightByQuery = (arrival: string, departure: string, flightList:
     flight.flightInfo.departure.airport.replace(" Airport", "") === departure
   )
   
-  console.log(matchingFlights)
   return {tickets: matchingFlights} as FlightData
 }
 

@@ -18,10 +18,6 @@ const FlightLists: FC<FlightListsProps> = ({flightData, getAll}) => {
   const [checkedStates, setCheckedStates] = useState<boolean[]>([true, false, false, false, false])
 
   useEffect(() => {
-    setFlights(flightData)
-  }, [flights])
-
-  useEffect(() => {
     const sortedFlights = [...flights.tickets].sort((a, b) => {
       if (sortByPrice === "ASC") {
         return a.price.amount - b.price.amount
