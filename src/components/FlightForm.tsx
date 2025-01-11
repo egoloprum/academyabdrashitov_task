@@ -74,7 +74,7 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
 
   return (
     <form onSubmit={(e) => handleSearch && handleSearch(e)} className='max-w-[1000px] mt-40 w-full flex flex-col sm:flex-row gap-4'>
-      <div className='basis-1/3 flex flex-col text-black relative'>
+      <fieldset className='basis-1/3 flex flex-col text-black relative'>
         <label className='mb-2 border-b'>Departure</label>
         <input
           type="text"
@@ -111,9 +111,9 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
             )}
           </div>
         )}
-      </div>
+      </fieldset>
 
-      <div className='basis-1/3 flex flex-col text-black relative'>
+      <fieldset className='basis-1/3 flex flex-col text-black relative'>
         <label className='mb-2 border-b'>Arrivals</label>
         <input
           type="text"
@@ -150,14 +150,14 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
             )}
           </div>
         )}
-      </div>
+      </fieldset>
 
-      <div className='basis-1/3 flex flex-col text-black'>
+      <fieldset className='basis-1/3 flex flex-col text-black'>
         <label className='mb-2 border-b'>Search flight</label>
         <button type='submit' className='p-2 border border-gray-300 w-full'>
           Find
         </button>
-      </div>
+      </fieldset>
     </form>
   )
 }

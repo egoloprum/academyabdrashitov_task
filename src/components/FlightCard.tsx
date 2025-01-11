@@ -10,12 +10,12 @@ interface FlightCardProps {
 const FlightCard: FC<FlightCardProps> = ({ticket}) => {
   return (
     <MyLink href={`flights/${ticket.id}`} className='border-2 p-4 w-full'>
-      <div className='flex gap-2 items-center justify-between'>
+      <section className='flex gap-2 items-center justify-between'>
         <p className='basis-1/2 text-2xl text-indigo-500 font-bold'>{ticket.price.amount} {ticket.price.currency}</p>
         <p className='basis-1/2 '>{ticket.airline.name}</p>
-      </div>
+      </section>
 
-      <div className='py-2 flex flex-wrap gap-2'>
+      <section className='py-2 flex flex-wrap gap-2'>
         <p className='flex flex-col'>
           <label className='mb-2 border-b'>Departure</label>
           <span className='mb-2'>{ticket.flightInfo.departure.airport}</span>
@@ -26,16 +26,16 @@ const FlightCard: FC<FlightCardProps> = ({ticket}) => {
           <span className='mb-2'>{ticket.flightInfo.arrival.airport}</span>
           <span className='mt-auto'>{ticket.flightInfo.arrival.dateTime.split("T")[0]}</span>
         </p>
-      </div>
+      </section>
 
-      <div>
+      <section>
         <p className='py-2 flex basis-1/2 flex-col'>
           <label className='mb-2 border-b'>Duration</label>
           <span>{ticket.flightInfo.duration}</span>
         </p>
-      </div>
+      </section>
 
-      <div className='flex flex-wrap flex-col w-full'>
+      <section className='flex flex-wrap flex-col w-full'>
         <label className='mb-2 border-b w-full'>Layovers: {ticket.layovers.length}</label>
         { ticket.layovers.length ? (
           ticket.layovers.map((layover: Layover, index: number) => (
@@ -47,7 +47,7 @@ const FlightCard: FC<FlightCardProps> = ({ticket}) => {
         ) : (
           null
         ) }
-      </div>
+      </section>
     </MyLink>
   )
 }

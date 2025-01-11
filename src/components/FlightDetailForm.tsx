@@ -37,7 +37,7 @@ const FlightDetailForm: FC<FlightDetailFormProps> = ({ticket}) => {
   }
 
   return (
-    <div className="flex flex-wrap gap-4 sm:gap-8">
+    <section className="flex flex-wrap gap-4 sm:gap-8">
       <FormName name={name} setName={setName} setError={(isValid: boolean) => updateErrorState(0, isValid)} />
       <FormBirthday birthday={birthday} setBirthday={setBirthday} setError={(isValid: boolean) => updateErrorState(1, isValid)} />
       <FormDocument document={document} setDocument={setDocument} setError={(isValid: boolean) => updateErrorState(2, isValid)} />
@@ -64,7 +64,7 @@ const FlightDetailForm: FC<FlightDetailFormProps> = ({ticket}) => {
         </button>
       </p>
 
-    </div>
+    </section>
   )
 }
 

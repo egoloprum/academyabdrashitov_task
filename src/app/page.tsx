@@ -35,8 +35,8 @@ export default async function Home({
     const flightSearch = getFlightByQuery(arrival, departure, flightData)
 
     return (
-      <div className="w-full min-h-[100vh]">
-        <div className="p-4 w-full flex flex-col gap-4 justify-center items-center">
+      <main className="w-full min-h-[100vh]">
+        <article className="p-4 w-full flex flex-col gap-4 justify-center items-center">
           <FlightForm flightList={flightData} departures={departureDest} arrivals={arrivalDest} />
           <FlightsAllBtn />
           { !departure && !arrival && !getAll ? (
@@ -44,15 +44,15 @@ export default async function Home({
           ) : (
             <FlightLists flightData={getAll ? flightData : flightSearch} />
           ) }
-        </div>
-      </div>
+        </article>
+      </main>
     )
   } catch (error) {
     console.error("Error in Home component:", error)
     return (
-      <div className="w-full min-h-[100vh] flex justify-center items-center">
+      <main className="w-full min-h-[100vh] flex justify-center items-center">
         <p>Error fetching flight data. Please try again later.</p>
-      </div>
+      </main>
     )
   }
 }

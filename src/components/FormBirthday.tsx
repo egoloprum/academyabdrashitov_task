@@ -66,7 +66,7 @@ const FormBirthday: FC<FormBirthdayProps> = ({ birthday, setBirthday, setError }
   }, [birthday])
 
   return (
-    <div className="flex flex-col gap-2 sm:gap-4">
+    <p className="flex flex-col gap-2 sm:gap-4">
       <label className="font-bold border-b">Birthday</label>
       <input
         type="text"
@@ -76,7 +76,7 @@ const FormBirthday: FC<FormBirthdayProps> = ({ birthday, setBirthday, setError }
         maxLength={10}
         className={`p-2 border-2 ${isValid ? 'border-gray-300' : 'border-red-500'} focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full`}
       />
-    </div>
+    </p>
   )
 }
 
