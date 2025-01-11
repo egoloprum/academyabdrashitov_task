@@ -63,10 +63,16 @@ const generateLayovers = () : Layover[] => {
 const flightData: FlightData = generateFlightData()
 
 
-export const getFlightData = () : FlightData => {
-  if (!flightData.tickets.length) {
-    return generateFlightData()
-  }
-  
-  return flightData
+export const getFlightData = (): Promise<FlightData> => {
+  return new Promise((resolve, reject) => {
+    try {
+      if (!flightData.tickets.length) {
+        resolve(generateFlightData())
+      } else {
+        resolve(flightData)
+      }
+    } catch (error) {
+      reject(error)
+    }
+  })
 }

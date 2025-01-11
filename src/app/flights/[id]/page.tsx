@@ -12,10 +12,16 @@ const page = async ({ params }: { params: Promise<pageProps['params']> }) => {
   const resolvedParams = await params
   const { id } = resolvedParams
 
-  const flight = getFlightById(id)
+  let flight = null
 
-  if (!flight) {
-    return null
+  try {
+    flight = await getFlightById(id)
+    if (!flight) { return null }  
+  } catch (error) {
+    console.error("Error fetching flight data:", error)
+    return (
+      <div>Error fetching flight data. Please try again later.</div>
+    ) 
   }
   
   return (

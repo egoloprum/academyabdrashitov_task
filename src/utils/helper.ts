@@ -1,34 +1,42 @@
-import { getFlightData } from "./db"
+export const getFlightById = async (id: string): Promise<Ticket | null> => {
+  try {
+    const API_URL = process.env.NODE_ENV === 'production' 
+    ? process.env.URL_PRODUCTION 
+    : process.env.URL_DEVELOPMENT
+    
+    const response = await fetch(`${API_URL}/api/flights`, { cache: 'force-cache' })
+    const flightList = await response.json() as FlightData
 
-export const getFlightById = (id: string) => {
-  const flightList = getFlightData()
-  const flight = flightList.tickets.find(ticket => ticket.id === id)
-
-  return flight || null
+    const flight = flightList.tickets.find(ticket => ticket.id === id)
+    return flight || null
+  } catch (error) {
+    console.error("Error in getFlightById:", error)
+    return null
+  }
 }
 
 export const getDepartureDestinations = (flightList: FlightData) => {
-  const uniqueDestinations = [] as string[]
+  const departures = [] as string[]
 
   flightList.tickets.map((ticket: Ticket) => {
     const departure = ticket.flightInfo.departure.airport
 
-    uniqueDestinations.push(departure.replace(" Airport", ""))
+    departures.push(departure.replace(" Airport", ""))
   })
 
-  return uniqueDestinations
+  return departures
 }
 
 export const getArrivalDestinations = (flightList: FlightData) => {
-  const uniqueDestinations = [] as string[]
+  const arrivals = [] as string[]
 
   flightList.tickets.map((ticket: Ticket) => {
     const arrival = ticket.flightInfo.arrival.airport
 
-    uniqueDestinations.push(arrival.replace(" Airport", ""))
+    arrivals.push(arrival.replace(" Airport", ""))
   })
 
-  return uniqueDestinations
+  return arrivals
 }
 
 export const getArrivalByDeparture = (departure: string, flightList: FlightData) => {
