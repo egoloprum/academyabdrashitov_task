@@ -20,7 +20,7 @@ export default async function Home({
   
   const getAll = resolvedSearchParams.all || ''
   
-  let flightData = getFlightData()  
+  const flightData = getFlightData()  
   const departureDest = getDepartureDestinations(flightData)
   const arrivalDest = getArrivalDestinations(flightData)
 
@@ -31,7 +31,11 @@ export default async function Home({
       <div className="p-4 w-full flex flex-col gap-4 justify-center items-center">
         <FlightForm flightList={flightData} departures={departureDest} arrivals={arrivalDest} />
         <FlightsAllBtn />
-        <FlightLists flightData={getAll ? flightData : flightSearch} getAll={getAll} />
+        { !departure && !arrival && !getAll ? (
+          null
+        ) : (
+          <FlightLists flightData={getAll ? flightData : flightSearch} />
+        ) }
       </div>
     </div>
   );

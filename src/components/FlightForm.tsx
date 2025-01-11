@@ -18,8 +18,12 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
     event.preventDefault()
 
     const params = new URLSearchParams()
-    params.set('departure', searchDeparture)
-    params.set('arrival', searchArrival)
+    if (searchDeparture) {
+      params.set('departure', searchDeparture)
+    }
+    if (searchArrival) {
+      params.set('arrival', searchArrival)
+    }
 
     router.replace(`${pathname}?${params.toString()}`)
   }
@@ -86,6 +90,12 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
         
         {showDepartureSelect && (
           <div className="absolute top-20 left-0 w-full max-h-32 overflow-y-auto border-2 z-10 bg-white">
+            <div 
+              className='p-2 hover:bg-gray-200 cursor-pointer'
+              onClick={() => handleSelectDeparture("")}
+            >
+              Dismiss
+            </div>
             {filteredDepartures.length > 0 ? (
               filteredDepartures.map((dest, index) => (
                 <div
@@ -119,6 +129,12 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
         
         {showArrivalSelect && (
           <div className="absolute top-20 left-0 w-full max-h-32 overflow-y-auto border-2 z-10 bg-white">
+            <div 
+              className='p-2 hover:bg-gray-200 cursor-pointer'
+              onClick={() => handleSelectArrival("")}
+            >
+              Dismiss
+            </div>
             {filteredArrivals.length > 0 ? (
               filteredArrivals.map((arriv, index) => (
                 <div

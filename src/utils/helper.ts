@@ -8,27 +8,27 @@ export const getFlightById = (id: string) => {
 }
 
 export const getDepartureDestinations = (flightList: FlightData) => {
-  const uniqueDestinations = new Set<string>()
+  const uniqueDestinations = [] as string[]
 
   flightList.tickets.map((ticket: Ticket) => {
     const departure = ticket.flightInfo.departure.airport
 
-    uniqueDestinations.add(departure.replace(" Airport", ""))
+    uniqueDestinations.push(departure.replace(" Airport", ""))
   })
 
-  return Array.from(uniqueDestinations)
+  return uniqueDestinations
 }
 
 export const getArrivalDestinations = (flightList: FlightData) => {
-  const uniqueDestinations = new Set<string>()
+  const uniqueDestinations = [] as string[]
 
   flightList.tickets.map((ticket: Ticket) => {
     const arrival = ticket.flightInfo.arrival.airport
 
-    uniqueDestinations.add(arrival.replace(" Airport", ""))
+    uniqueDestinations.push(arrival.replace(" Airport", ""))
   })
 
-  return Array.from(uniqueDestinations)
+  return uniqueDestinations
 }
 
 export const getArrivalByDeparture = (departure: string, flightList: FlightData) => {

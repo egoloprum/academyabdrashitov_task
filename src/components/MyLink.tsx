@@ -1,13 +1,13 @@
 "use client"
 
 import { useRouter } from 'next/navigation'
-import { MouseEventHandler, useEffect } from 'react'
+import { MouseEventHandler, ReactNode, useEffect } from 'react'
 
 interface MyLinkProps {
   href: string
   prefetch?: boolean
   className: string
-  children: any
+  children: ReactNode
 }
 
 const MyLink: React.FC<MyLinkProps> = ({ href, prefetch = true, className, children }) => {

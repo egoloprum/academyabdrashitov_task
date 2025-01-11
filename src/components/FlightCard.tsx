@@ -15,13 +15,13 @@ const FlightCard: FC<FlightCardProps> = ({ticket}) => {
         <p className='basis-1/2 '>{ticket.airline.name}</p>
       </div>
 
-      <div className='py-2 flex gap-2'>
-        <p className='flex basis-1/2 flex-col'>
+      <div className='py-2 flex flex-wrap gap-2'>
+        <p className='flex flex-col'>
           <label className='mb-2 border-b'>Departure</label>
           <span className='mb-2'>{ticket.flightInfo.departure.airport}</span>
           <span className='mt-auto'>{ticket.flightInfo.departure.dateTime.split("T")[0]}</span>
         </p>
-        <p className='flex basis-1/2 flex-col'>
+        <p className='flex flex-col'>
           <label className='mb-2 border-b'>Arrival</label>
           <span className='mb-2'>{ticket.flightInfo.arrival.airport}</span>
           <span className='mt-auto'>{ticket.flightInfo.arrival.dateTime.split("T")[0]}</span>

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-const TICKET_COUNT = 20
+const TICKET_COUNT = 50
 
 const generateFlightData = () : FlightData => {
   const tickets: Ticket[] = [];

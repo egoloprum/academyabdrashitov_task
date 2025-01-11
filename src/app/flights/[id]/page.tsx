@@ -19,7 +19,7 @@ const page = async ({ params }: { params: Promise<pageProps['params']> }) => {
   }
   
   return (
-    <div className="border-2 p-4 flex justify-center items-center">
+    <div className="p-4 flex justify-center items-center">
       <div className="border-2 p-4 max-w-[50rem] w-full my-20 flex flex-col gap-4 sm:gap-8">
 
         <div className="flex flex-row flex-wrap border-b justify-between">
