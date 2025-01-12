@@ -25,13 +25,13 @@ const FormName: FC<FormNameProps> = ({name, setName, setError}) => {
   }, [name])
 
   return (
-    <p className="flex flex-col gap-2 sm:gap-4">
-      <label className="font-bold border-b">Full Name</label>
+    <p className="form_order">
+      <label className="">Full Name</label>
       <input type="text" 
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder='Jon Jones'
-        className={`p-2 border-2 ${isValid ? 'border-gray-300' : 'border-red-500'} focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full`}
+        className={`${isValid ? 'input_gray' : 'input_red'}`}
       />
     </p>
   )

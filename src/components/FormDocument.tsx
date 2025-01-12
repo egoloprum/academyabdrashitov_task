@@ -31,14 +31,15 @@ const FormDocument: FC<FormDocumentProps> = ({document, setDocument, setError}) 
   }
 
   return (
-    <p className="flex flex-col gap-2 sm:gap-4">
-      <label className="font-bold border-b">Document</label>
+    <p className="form_order">
+      <label className="">Document</label>
       <input type="text" 
         value={document}
         onChange={(e) => handleChange(e)}
         placeholder='X0000000'
         maxLength={8}
-        className={`p-2 border-2 ${isValid ? 'border-gray-300' : 'border-red-500'} focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full`} />
+        className={`${isValid ? 'input_gray' : 'input_red'}`}
+      />
     </p>
   )
 }

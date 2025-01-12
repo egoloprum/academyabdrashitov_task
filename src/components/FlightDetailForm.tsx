@@ -37,27 +37,27 @@ const FlightDetailForm: FC<FlightDetailFormProps> = ({ticket}) => {
   }
 
   return (
-    <section className="flex flex-wrap gap-4 sm:gap-8">
+    <section className="flight_detail_form_container">
       <FormName name={name} setName={setName} setError={(isValid: boolean) => updateErrorState(0, isValid)} />
       <FormBirthday birthday={birthday} setBirthday={setBirthday} setError={(isValid: boolean) => updateErrorState(1, isValid)} />
       <FormDocument document={document} setDocument={setDocument} setError={(isValid: boolean) => updateErrorState(2, isValid)} />
 
-      <p className="flex flex-col gap-2 sm:gap-4">
-        <label className="font-bold border-b">Order</label>
+      <p className="">
+        <label className="">Order</label>
         <button type="button" 
           onClick={() => handleClick()}
-          className={`${error.some(err => err) && "bg-red-500"} p-2 px-8 border-2 flex items-center gap-2 w-full`}
+          className={`${error.some(err => err) && "button_error"}`}
         >
           <span>Done</span>
           <BookCheck />
         </button>
       </p>
 
-      <p className="flex flex-col gap-2 sm:gap-4">
-        <label className="font-bold border-b">Cancel</label>
+      <p className="">
+        <label className="">Cancel</label>
         <button type="button"
           onClick={() => handleReturn()}
-          className={`p-2 px-8 border-2 flex items-center gap-2 w-full`}
+          className=''
         >
           <span>Go back</span>
           <ArrowLeft />

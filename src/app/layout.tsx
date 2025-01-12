@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 
 const jetbrainsMono = JetBrains_Mono({
   weight: '400',
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${jetbrainsMono.className} antialiased min-h-[100vh] h-full`}
+        className={`${jetbrainsMono.className}`}
       >
         {children}
       </body>

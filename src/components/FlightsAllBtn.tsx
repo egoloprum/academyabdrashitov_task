@@ -16,7 +16,7 @@ const FlightsAllBtn = ({}) => {
 
   return (
     <form onSubmit={(e) => handleSubmit && handleSubmit(e)}>
-      <button className='p-2 px-8 border-2 rounded'>
+      <button className='flights_all_button'>
         See all flights
       </button>
     </form>

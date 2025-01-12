@@ -60,14 +60,14 @@ const FlightLists: FC<FlightListsProps> = ({flightData}) => {
   }, [checkedStates, flightData])
 
   return (
-    <article className='w-full flex flex-col gap-8 mb-40'>
+    <article className='flight_lists_container'>
 
-      <section className='flex flex-col gap-4 justify-center items-center'>
+      <section className='flight_lists_section_1 flex_center'>
         <FlightFiltering checkedStates={checkedStates} setCheckedStates={setCheckedStates} />
         <FlightSorting setSortByPrice={setSortByPrice} setSortByDuration={setSortByDuration} />
       </section>
 
-      <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+      <section className='flight_lists_section_2'>
         { flights.tickets.map((ticket: Ticket, index: number) => (
           <FlightCard key={index} ticket={ticket} />
         )) }

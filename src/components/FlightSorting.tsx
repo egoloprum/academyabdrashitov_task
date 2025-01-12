@@ -9,18 +9,18 @@ interface FlightSortingProps {
 
 const FlightSorting: FC<FlightSortingProps> = ({setSortByPrice, setSortByDuration}) => {
   return (
-    <article className='flex flex-col sm:flex-row gap-4 max-w-[50rem] w-full'>
-      <p className='flex flex-col w-full'>
-        <label className='mb-2 border-b'>Sort by price</label>
-        <select className='p-2 border-2 w-full' onChange={(e) => setSortByPrice(e.target.value)}>
+    <article className='flight_sorting_container'>
+      <p className=''>
+        <label className='label'>Sort by price</label>
+        <select className='' onChange={(e) => setSortByPrice(e.target.value)}>
           <option value="ASC">Ascending</option>
           <option value="DESC">Descending</option>
         </select>
       </p>
 
-      <p className='flex flex-col w-full'>
-        <label className='mb-2 border-b'>Sort by duration</label>
-        <select className='p-2 border-2 w-full' onChange={(e) => setSortByDuration(e.target.value)}>
+      <p className=''>
+        <label className='label'>Sort by duration</label>
+        <select className='' onChange={(e) => setSortByDuration(e.target.value)}>
           <option value="ASC">Ascending</option>
           <option value="DESC">Descending</option>
         </select>

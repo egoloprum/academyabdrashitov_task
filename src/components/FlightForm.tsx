@@ -77,9 +77,9 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
   }, [searchArrival])
 
   return (
-    <form onSubmit={(e) => handleSearch && handleSearch(e)} className='max-w-[1000px] mt-40 w-full flex flex-col sm:flex-row gap-4'>
-      <fieldset className='basis-1/3 flex flex-col text-black relative'>
-        <label className='mb-2 border-b'>Departure</label>
+    <form onSubmit={(e) => handleSearch && handleSearch(e)} className='flight_form_container'>
+      <fieldset className='fieldset'>
+        <label className='label'>Departure</label>
         <input
           type="text"
           placeholder="Search..."
@@ -89,13 +89,13 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
             setShowDepartureSelect(true)
           }}
           onFocus={() => setShowDepartureSelect(true)}
-          className="p-2 border-2 focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full"
+          className="input"
         />
         
         {showDepartureSelect && (
-          <div className="absolute top-20 left-0 w-full max-h-32 overflow-y-auto border-2 z-10 bg-white">
+          <div className="dropdown">
             <div 
-              className='p-2 hover:bg-gray-200 cursor-pointer'
+              className='dismiss'
               onClick={() => handleSelectDeparture("")}
             >
               Dismiss
@@ -104,21 +104,21 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
               filteredDepartures.map((dest, index) => (
                 <div
                   key={index}
-                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                  className="dismiss"
                   onClick={() => handleSelectDeparture(dest)}
                 >
                   {dest}
                 </div>
               ))
             ) : (
-              <div className="p-2 text-gray-500" onClick={ () => handleSelectDeparture("") }>No options available</div>
+              <div className="not_found" onClick={ () => handleSelectDeparture("") }>No options available</div>
             )}
           </div>
         )}
       </fieldset>
 
-      <fieldset className='basis-1/3 flex flex-col text-black relative'>
-        <label className='mb-2 border-b'>Arrivals</label>
+      <fieldset className='fieldset'>
+        <label className='label'>Arrivals</label>
         <input
           type="text"
           placeholder="Search..."
@@ -128,13 +128,13 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
             setShowArrivalSelect(true)
           }}
           onFocus={() => setShowArrivalSelect(true)}
-          className="p-2 border-2 focus:outline-2 focus:outline-indigo-500 hover:outline-2 hover:outline-indigo-500 w-full"
+          className="input"
         />
         
         {showArrivalSelect && (
-          <div className="absolute top-20 left-0 w-full max-h-32 overflow-y-auto border-2 z-10 bg-white">
+          <div className="dropdown">
             <div 
-              className='p-2 hover:bg-gray-200 cursor-pointer'
+              className='dismiss'
               onClick={() => handleSelectArrival("")}
             >
               Dismiss
@@ -143,22 +143,22 @@ const FlightForm: FC<FlightFormProps> = ({flightList, departures, arrivals}) => 
               filteredArrivals.map((arriv, index) => (
                 <div
                   key={index}
-                  className="p-2 hover:bg-gray-200 cursor-pointer"
+                  className="dismiss"
                   onClick={() => handleSelectArrival(arriv)}
                 >
                   {arriv}
                 </div>
               ))
             ) : (
-              <div className="p-2 text-gray-500" onClick={ () => handleSelectArrival("") }>No options available</div>
+              <div className="not_found" onClick={ () => handleSelectArrival("") }>No options available</div>
             )}
           </div>
         )}
       </fieldset>
 
-      <fieldset className='basis-1/3 flex flex-col text-black'>
-        <label className='mb-2 border-b'>Search flight</label>
-        <button type='submit' className='p-2 border border-gray-300 w-full'>
+      <fieldset className='fieldset'>
+        <label className='label'>Search flight</label>
+        <button type='submit' className='button'>
           Find
         </button>
       </fieldset>
